@@ -57,3 +57,16 @@ java Main
 - Search for movies with `searchByYear()`, `searchByDirector()` or `searchByGenre()`
 
 ## Documentation of the Development Process
+
+### DAY 1
+
+- Commented out the previous `Main` so we can now  the use the new methods that we will create
+- Created `allReviews` attribute in the class `Review`
+- The constructors now add every review objects that get created to the `allReviews` list
+- Created `allUser` attribute in the class `User`
+- The constructor now adds every user objects that get created to the `allUser` list
+- Created getters for `allReviews` and `allUsers`
+- Creted the methods `getSpecificUser` and `getSpecificReview`
+- Made a `Movie` constructor that takes as input one genre without an array and also doesnt take a director
+
+---

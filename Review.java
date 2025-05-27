@@ -1,3 +1,5 @@
+import java.util.*;
+
 public abstract class Review implements Printable {
     // attributes
     protected User user;
@@ -5,6 +7,7 @@ public abstract class Review implements Printable {
     protected String comment;
     protected Movie movie;
     protected double weight;
+    protected static List<Review> allReviews = new ArrayList<>();
 
     // constructor
     public Review(User user, int rating, String comment, Movie movie) throws Exception {
@@ -17,6 +20,7 @@ public abstract class Review implements Printable {
         this.movie = movie;
         user.addReview(this);
         movie.addReview(this);
+        allReviews.add(this);
     }
 
     public Review(User user, int rating, Movie movie) throws Exception {
@@ -29,6 +33,7 @@ public abstract class Review implements Printable {
         this.movie = movie;
         user.addReview(this);
         movie.addReview(this);
+        allReviews.add(this);
     }
 
     // methods
@@ -63,6 +68,18 @@ public abstract class Review implements Printable {
         return movie;
     }
 
+    public static List<Review> getAllReviews() {
+        return new ArrayList<>(allReviews);
+    }
+
+    public static Review getSpecificReview(User user, Movie movie) {
+        for (Review review : allReviews) {
+            if (review.getUser().equals(user) && review.getMovie().equals(movie)) {
+                return review;
+            }
+        }
+        return null;
+    }
     // toString
     @Override
     public String toString() {
