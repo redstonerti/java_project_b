@@ -134,6 +134,8 @@ public class Main {
 
         // Read the CSV file and process each line
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            // Skip the header line
+            br.readLine();
             while ((line = br.readLine()) != null) {
                 // Split the line by the specified delimiter
                 String[] values = line.split(svSplitBy);
@@ -148,6 +150,8 @@ public class Main {
                 // Find or create the user
                 if (User.getSpecificUser(username) == null) {
                     user = new User(username);
+                    // user.printDetails();
+                    // System.out.println();
                 }else {
                     user = User.getSpecificUser(username);
                 }
@@ -155,12 +159,20 @@ public class Main {
                 // Find or create the movie
                 if (Movie.getSpecificMovie(movieTitle) == null) {
                     movie = new Movie(movieTitle, year, genre);
+                    // movie.printDetails();
+                    // System.out.println();
                 }else {
                     movie = Movie.getSpecificMovie(movieTitle);
                 }
 
                 // Find or Create a review
-
+                if (Review.getSpecificReview(user, movie) == null) {
+                    review = new BasicReview(user, rating, comment, movie);
+                    // review.printDetails();
+                    // System.out.println();
+                } else {
+                    review = Review.getSpecificReview(user, movie);
+                }
             }
         } catch (Exception e) {
             System.out.println("Error reading CSV file: " + e.getMessage());
