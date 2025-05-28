@@ -16,7 +16,8 @@ public class Recommender {
         List<Movie> moviesToRecommend = new ArrayList<>();
         for (User u : similarUsers) {
             for (Movie movie : u.getReviewedMovies()) {
-                if (!moviesToRecommend.contains(movie) && !user.getReviewedMovies().contains(movie)) {
+                if (!moviesToRecommend.contains(movie) && !user.getReviewedMovies().contains(movie) &&
+                Review.getSpecificReview(u, movie).getRating() > 7) {
                     moviesToRecommend.add(movie);
                 }
             }
