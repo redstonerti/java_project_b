@@ -72,5 +72,9 @@ java Main
 - Made Review constructor throw exception if a review already exists for the specified user and movie
 - Created **DataLoader** class as specified by the UML diagram and moved file input logic there
 - Made `loadFromCSV()` split movie genres by this `|` delimiter
+- Changed `getSpecificMovie()` to compare with the `.equals()` method
+- Changed `.split("|")` to `.split("\\|")` in `loadFromCSV` in order to escape the pipe from regex
+- Created `moviesByGenre` hashmap and made the constructor of Movie add itself to it
+- Added `printMoviesByGenre()` in the **Movie** class to make it easy to see how the hashmap works
 
 ---

@@ -140,5 +140,6 @@ public class Main {
          */
 
         DataLoader.loadFromCSV("reviews.csv", ",");
+        Movie.printMoviesByGenre();
     }
 }
