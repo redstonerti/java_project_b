@@ -78,5 +78,6 @@ java Main
 - Added `printMoviesByGenre()` in the **Movie** class to make it easy to see how the hashmap works
 - Changed `moviesByGenre` to a TreeMap so that it is always sorted
 - Added `byReviewCount` Comparator to the **Movie** class
+- Created **Recommender** class with `calculateMSE()` and `arePreferencesSimilar()` functions
 
 ---
