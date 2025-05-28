@@ -80,7 +80,12 @@ java Main
 - Added the attribute `reviewers` to **Movie**
 - Changed the method `getReviewers()` so now it just returns the list of the attribute `reviewers`
 - Created `addReviewer(User u)` in **Movie**
-- The **Review** constructors now add the user of the review to the movie's `reviewers`
+- The **Review** constructors now add the user of the review to the movie's `reviewers` list
 - Made the other **Review** constructor throw exception if a review already exists for the specified user and movie
 - Made the **Movie** constructor throw exception if a movie already exists with the specified title
+- Added `reviewdMovies` attribute to **User**
+- Created `getReviwedMovies()` method **User**
+- Created `addReviewedMovie(Movie m)` method to **User**
+- The **Review** constructors now add the movie of the review to the user's `reviewedMovies`
+
 ---

@@ -4,6 +4,7 @@ public class User implements Printable {
     // attributes
     protected String username;
     protected List<Review> reviews;
+    protected List<Movie> reviewedMovies;
     protected static List<User> allUsers = new ArrayList<>();
 
     // constructor
@@ -14,11 +15,16 @@ public class User implements Printable {
         this.username = username;
         this.reviews = new ArrayList<Review>();
         allUsers.add(this);
+        this.reviewedMovies = new ArrayList<Movie>();
     }
 
     // methods
     public void addReview(Review r) {
         reviews.add(r);
+    }
+
+    public void addReviewedMovie(Movie m) {
+        reviewedMovies.add(m);
     }
 
     // print details
@@ -28,6 +34,11 @@ public class User implements Printable {
     }
 
     // getters
+
+    public List<Movie> getReviewedMovies() {
+        return new ArrayList<>(reviewedMovies);
+    }
+
     public String getUsername() {
         return username;
     }

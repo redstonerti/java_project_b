@@ -125,7 +125,7 @@ public class Movie implements Printable {
 
     // getters
         public List<User> getReviewers() {
-        return new ArrayList<>(reviewers);
+            return new ArrayList<>(reviewers);
     }
 
     public String getTitle() {

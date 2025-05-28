@@ -25,6 +25,7 @@ public abstract class Review implements Printable {
         movie.addReview(this);
         allReviews.add(this);
         movie.addReviewer(user);
+        user.addReviewedMovie(movie);
     }
 
     public Review(User user, int rating, Movie movie) throws Exception {
@@ -42,6 +43,7 @@ public abstract class Review implements Printable {
         movie.addReview(this);
         allReviews.add(this);
         movie.addReviewer(user);
+        user.addReviewedMovie(movie);
     }
 
     // methods
