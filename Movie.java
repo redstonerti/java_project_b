@@ -8,17 +8,22 @@ public class Movie implements Printable {
     private String director;
     private List<Review> reviews;
     private List<Movie> relatedMovies;
+    private List<User> reviewers;
     private static List<Movie> allMovies = new ArrayList<>();
     private static TreeMap<String, List<Movie>> moviesByGenre = new TreeMap<>();
 
     // constructors
-    public Movie(String title, int year, List<String> genres, String director) {
+    public Movie(String title, int year, List<String> genres, String director) throws Exception {
+        if (Movie.getSpecificMovie(title) != null) {
+            throw new Exception("The movie " + title + " already exists.");
+        }
         this.title = title;
         this.year = year;
         this.genres = new ArrayList<>(genres);
         this.director = director;
         this.reviews = new ArrayList<Review>();
         this.relatedMovies = new ArrayList<Movie>();
+        this.reviewers = new ArrayList<User>();
         for (String genre : genres) {
             List<Movie> currentList = moviesByGenre.get(genre);
             if (currentList == null) {
@@ -30,11 +35,11 @@ public class Movie implements Printable {
         allMovies.add(this);
     }
 
-    public Movie(String title, int year, String genre) {
+    public Movie(String title, int year, String genre) throws Exception {
         this(title, year, List.of(genre), "Unknown Director");
     }
 
-    public Movie(String title, int year, List<String> genres) {
+    public Movie(String title, int year, List<String> genres) throws Exception {
         this(title, year, genres, "Unknown Director");
     }
 
@@ -51,6 +56,12 @@ public class Movie implements Printable {
     // methods
     public void addReview(Review r) {
         reviews.add(r);
+    }
+
+    public void addReviewer(User u) {
+        if (!reviewers.contains(u)) {
+            reviewers.add(u);
+        }
     }
 
     public void addRelatedMovie(Movie m) {
@@ -101,15 +112,7 @@ public class Movie implements Printable {
         return highestRatedByGenre;
     }
 
-    public List<User> getReviewers() {
-        List<User> reviewers = new ArrayList<>();
-        for (Review review : this.getReviews()) {
-            if (!reviewers.contains(review.getUser())) {
-                reviewers.add(review.getUser());
-            }
-        }
-        return reviewers;
-    }
+
 
     // print details
     public void printDetails() {
@@ -121,6 +124,10 @@ public class Movie implements Printable {
     }
 
     // getters
+        public List<User> getReviewers() {
+        return new ArrayList<>(reviewers);
+    }
+
     public String getTitle() {
         return title;
     }
