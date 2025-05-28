@@ -76,5 +76,7 @@ java Main
 - Changed `.split("|")` to `.split("\\|")` in `loadFromCSV` in order to escape the pipe from regex
 - Created `moviesByGenre` hashmap and made the constructor of Movie add itself to it
 - Added `printMoviesByGenre()` in the **Movie** class to make it easy to see how the hashmap works
+- Changed `moviesByGenre` to a TreeMap so that it is always sorted
+- Added `byReviewCount` Comparator to the **Movie** class
 
 ---

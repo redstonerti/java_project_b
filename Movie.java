@@ -9,7 +9,7 @@ public class Movie implements Printable {
     private List<Review> reviews;
     private List<Movie> relatedMovies;
     private static List<Movie> allMovies = new ArrayList<>();
-    private static HashMap<String, List<Movie>> moviesByGenre = new HashMap<>();
+    private static TreeMap<String, List<Movie>> moviesByGenre = new TreeMap<>();
 
     // constructors
     public Movie(String title, int year, List<String> genres, String director) {
@@ -178,6 +178,9 @@ public class Movie implements Printable {
             m2.getAverageRating());
 
     public static Comparator<Movie> byTitle = (m1, m2) -> m1.getTitle().compareTo(m2.getTitle());
+
+    public static Comparator<Movie> byReviewCount = (m1, m2) -> Integer.compare(m1.getReviews().size(),
+            m2.getReviews().size());
 
     // searchers
     public static List<Movie> searchByYear(int year) {
