@@ -7,7 +7,10 @@ public class User implements Printable {
     protected static List<User> allUsers = new ArrayList<>();
 
     // constructor
-    public User(String username) {
+    public User(String username) throws Exception {
+        if (User.getSpecificUser(username) != null) {
+            throw new Exception("user" + username + "  already exiists ");
+        }
         this.username = username;
         this.reviews = new ArrayList<Review>();
         allUsers.add(this);

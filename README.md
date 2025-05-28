@@ -58,8 +58,6 @@ java Main
 
 ## Documentation of the Development Process
 
-### DAY 1
-
 - Commented out the previous `Main` so we can now  the use the new methods that we will create
 - Created `allReviews` attribute in the class `Review`
 - The constructors now add every review objects that get created to the `allReviews` list
@@ -69,14 +67,14 @@ java Main
 - Creted the methods `getSpecificUser` and `getSpecificReview`
 - Made a `Movie` constructor that takes as input one genre without an array and also doesnt take a director
 - Created the corresponding movie, user and review objects in `Main` according to the given `reviews.csv` file
-- Made Review constructor throw exception if a review already exists for the specified user and movie
+- Made `Review` constructor throw exception if a review already exists for the specified user and movie
 - Created **DataLoader** class as specified by the UML diagram and moved file input logic there
 - Made `loadFromCSV()` split movie genres by this `|` delimiter
 - Changed `getSpecificMovie()` to compare with the `.equals()` method
 - Changed `.split("|")` to `.split("\\|")` in `loadFromCSV` in order to escape the pipe from regex
-- Created `moviesByGenre` hashmap and made the constructor of Movie add itself to it
+- Created `moviesByGenre` treemap and made the constructor of Movie add itself to it
 - Added `printMoviesByGenre()` in the **Movie** class to make it easy to see how the hashmap works
 - Changed `moviesByGenre` to a TreeMap so that it is always sorted
 - Added `byReviewCount` Comparator to the **Movie** class
-
+- Made `User` constructor throw exception if user already exists
 ---
