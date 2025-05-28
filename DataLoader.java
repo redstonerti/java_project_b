@@ -19,7 +19,7 @@ public class DataLoader {
 
                 String movieTitle = values[0];
                 int year = Integer.parseInt(values[1]);
-                List<String> genres = Arrays.asList(values[2].split("|"));
+                List<String> genres = Arrays.asList(values[2].split("\\|"));
                 String username = values[3];
                 int rating = Integer.parseInt(values[4]);
                 String comment = values[5];

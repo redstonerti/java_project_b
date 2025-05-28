@@ -140,5 +140,26 @@ public class Main {
          */
 
         DataLoader.loadFromCSV("reviews.csv", ",");
+
+        // >>> Top 5 Stat
+        Map<String, List<Movie>> genreMap = new HashMap<>();
+
+        for (Movie movie : Movie.getAllMovies()) {
+            for (String genre : movie.getGenres()) {
+                genreMap.putIfAbsent(genre, new ArrayList<>());
+                genreMap.get(genre).add(movie);
+            }
+        }
+
+        for (String genre : genreMap.keySet()) {
+            System.out.println("Top 5 movies in: " + genre);
+            genreMap.get(genre).stream()
+                    .filter(m -> m.getAverageRating() > 0)
+                    .sorted((m1, m2) -> Double.compare(m2.getAverageRating(), m1.getAverageRating()))
+                    .limit(5)
+                    .forEach(m -> System.out.printf("- %s (%.2f)\n", m.getTitle(), m.getAverageRating()));
+            System.out.println();
+        }
+        // >>> Done with Top 5 Stat
     }
 }
