@@ -27,10 +27,22 @@ public class User implements Printable {
         reviewedMovies.add(m);
     }
 
+    public double getAverageRating() {
+        if (reviews.isEmpty()) {
+            return 0.0;
+        }
+        double totalRating = 0.0;
+        for (Review review : reviews) {
+            totalRating += review.getRating();
+        }
+        return totalRating / reviews.size();
+    }
+
     // print details
     public void printDetails() {
         System.out.println("User: " + username);
         System.out.println("Reviews submitted: " + reviews.size());
+        System.out.println("Average rating: " + getAverageRating());
     }
 
     // getters

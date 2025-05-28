@@ -140,7 +140,6 @@ public class Main {
          */
 
         DataLoader.loadFromCSV("reviews.csv", ",");
-
         // Movie.printMoviesByGenre();
         // System.out.println(Recommender.calculateMSE(User.getSpecificUser("singer22"),
         // User.getSpecificUser("maria89")));

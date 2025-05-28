@@ -89,9 +89,13 @@ java Main
 - Created `getReviwedMovies()` method **User**
 - Created `addReviewedMovie(Movie m)` method to **User**
 - The **Review** constructors now add the movie of the review to the user's `reviewedMovies`
+- Created `getTop5MoviesPerGenre()` in the class **Movie** which returns a hashmap with all the gernes as keys and lists of the 5 best rated movies for each coresponding genre as values
+- Created the method `printTop5MoviesPerGenre()` in the class **Movie** to make it easy to see how the method `getTop5MoviesPerGenre()` works
+- Created `getAverageRating()` in the class **User** which returns the average rating of the user`s reviews
+- Added the `getAverageRating()` in the `printDetails()` of **USER**
+- Created the `getHighRatedMovies()` method in the class **Movie** which returns a list with all movies that got a rating of more than 7 by at least 80% of the reviewers
 - Added private method `getHashMapByGenre()` in the **Recommender** class
 - Fleshed out `recommendByContent()` in the **Recommender** class
 - Added example of `recommendByContent()` in **Main**
-
 
 ---
