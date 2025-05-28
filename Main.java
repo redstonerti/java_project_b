@@ -146,6 +146,9 @@ public class Main {
 
         Movie.printTop5MoviesPerGenre();
 
+        User.getSpecificUser("singer22").printDetails();
+        System.err.println(Movie.getHighRatedMovies());
+
 
 
 

@@ -246,4 +246,20 @@ public class Movie implements Printable {
         }
         return top5MoviesPerGenre;
     }
+
+    public static List<Movie> getHighRatedMovies() {
+        List<Movie> highRatedMovies = new ArrayList<>();
+        for (Movie movie : getAllMovies()) {
+            double count = 0.0;
+            for (Review review : movie.getReviews()) {
+                if (review.getRating() > 7) {
+                    count ++;
+            }
+            if (count/ movie.getReviews().size() >= 0.8) {
+                highRatedMovies.add(movie);
+            }
+            }
+        }
+        return highRatedMovies;
+    }
 }
