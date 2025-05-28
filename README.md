@@ -69,5 +69,8 @@ java Main
 - Creted the methods `getSpecificUser` and `getSpecificReview`
 - Made a `Movie` constructor that takes as input one genre without an array and also doesnt take a director
 - Created the corresponding movie, user and review objects in `Main` according to the given `reviews.csv` file
+- Made Review constructor throw exception if a review already exists for the specified user and movie
+- Created **DataLoader** class as specified by the UML diagram and moved file input logic there
+- Made `loadFromCSV()` split movie genres by this `|` delimiter
 
 ---

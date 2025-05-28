@@ -14,6 +14,9 @@ public abstract class Review implements Printable {
         if (rating < 1 || rating > 10) {
             throw new Exception("Rating must be between 0 and 10");
         }
+        if (Review.getSpecificReview(user, movie) != null) {
+            throw new Exception(user.username + " has already made a review for " + movie.getTitle());
+        }
         this.user = user;
         this.rating = rating;
         this.comment = comment;
@@ -80,6 +83,7 @@ public abstract class Review implements Printable {
         }
         return null;
     }
+
     // toString
     @Override
     public String toString() {

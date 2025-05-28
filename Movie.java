@@ -21,8 +21,12 @@ public class Movie implements Printable {
         allMovies.add(this);
     }
 
-    public Movie(String title, int year, String genre){
+    public Movie(String title, int year, String genre) {
         this(title, year, List.of(genre), "Unknown Director");
+    }
+
+    public Movie(String title, int year, List<String> genres) {
+        this(title, year, genres, "Unknown Director");
     }
 
     // methods
