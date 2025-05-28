@@ -76,6 +76,8 @@ java Main
 - Added `printMoviesByGenre()` in the **Movie** class to make it easy to see how the hashmap works
 - Changed `moviesByGenre` to a TreeMap so that it is always sorted
 - Added `byReviewCount` Comparator to the **Movie** class
+- Created **Recommender** class with `calculateMSE()` and `arePreferencesSimilar()` functions
+- Fleshed out `recommendByUserSimilarity()` in **Recommender** class
 - Made **User** constructor throw exception if user already exists with the specified name
 - Added the attribute `reviewers` to **Movie**
 - Changed the method `getReviewers()` so now it just returns the list of the attribute `reviewers`
@@ -87,5 +89,6 @@ java Main
 - Created `getReviwedMovies()` method **User**
 - Created `addReviewedMovie(Movie m)` method to **User**
 - The **Review** constructors now add the movie of the review to the user's `reviewedMovies`
+
 
 ---
