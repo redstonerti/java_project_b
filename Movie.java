@@ -55,9 +55,10 @@ public class Movie implements Printable {
     }
 
     public static void printTop5MoviesPerGenre() {
-        for (String genre : getTop5MoviesPerGenre().keySet()) {
+        Map<String, List<Movie>> top5MoviesByGenre = getTop5MoviesPerGenre();
+        for (String genre : top5MoviesByGenre.keySet()) {
             System.out.println("Top 5 movies in: " + genre);
-            for (Movie movie : moviesByGenre.get(genre)) {
+            for (Movie movie : top5MoviesByGenre.get(genre)) {
                 System.out.printf("- %s (%.2f)\n", movie.getTitle(), movie.getAverageRating());
             }
             System.out.println();
