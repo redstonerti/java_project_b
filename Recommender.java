@@ -96,8 +96,8 @@ public class Recommender {
         int commonMovies = 0;
         for (Review review1 : user1.getReviews()) {
             for (Review review2 : user2.getReviews()) {
-                if (review1.movie.equals(review2.movie)) {
-                    sum += Math.pow(review1.rating - review2.rating, 2);
+                if (review1.getMovie().equals(review2.getMovie())) {
+                    sum += Math.pow(review1.getRating() - review2.getRating(), 2);
                     commonMovies += 1;
                     continue;
                 }

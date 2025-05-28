@@ -97,5 +97,6 @@ java Main
 - Added private method `getHashMapByGenre()` in the **Recommender** class
 - Fleshed out `recommendByContent()` in the **Recommender** class
 - Added example of `recommendByContent()` in **Main**
+- Changed `calculateMSE()` function to use getters instead of directly accessing attributes
 
 ---

@@ -236,7 +236,7 @@ public class Movie implements Printable {
         for (String genre : moviesByGenre.keySet()) {
             top5MoviesPerGenre.put(genre, new ArrayList<Movie>());
             moviesByGenre.get(genre).sort(byAverageRating.reversed());
-            if(moviesByGenre.get(genre).size() > 5) {
+            if (moviesByGenre.get(genre).size() > 5) {
                 top5MoviesPerGenre.get(genre).addAll(moviesByGenre.get(genre).subList(0, 5));
             } else {
                 top5MoviesPerGenre.get(genre).addAll(moviesByGenre.get(genre));
@@ -251,11 +251,11 @@ public class Movie implements Printable {
             double count = 0.0;
             for (Review review : movie.getReviews()) {
                 if (review.getRating() > 7) {
-                    count ++;
-            }
-            if (count/ movie.getReviews().size() >= 0.8) {
-                highRatedMovies.add(movie);
-            }
+                    count++;
+                }
+                if (count / movie.getReviews().size() >= 0.8) {
+                    highRatedMovies.add(movie);
+                }
             }
         }
         return highRatedMovies;
