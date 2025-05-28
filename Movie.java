@@ -1,10 +1,4 @@
 import java.util.*;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Movie implements Printable {
@@ -55,6 +49,16 @@ public class Movie implements Printable {
             System.out.print(genre + ": ");
             for (Movie movie : moviesByGenre.get(genre)) {
                 System.out.print(movie + ", ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printTop5MoviesPerGenre() {
+        for (String genre : getTop5MoviesPerGenre().keySet()) {
+            System.out.println("Top 5 movies in: " + genre);
+            for (Movie movie : moviesByGenre.get(genre)) {
+                System.out.printf("- %s (%.2f)\n", movie.getTitle(), movie.getAverageRating());
             }
             System.out.println();
         }

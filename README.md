@@ -89,6 +89,6 @@ java Main
 - Created `getReviwedMovies()` method **User**
 - Created `addReviewedMovie(Movie m)` method to **User**
 - The **Review** constructors now add the movie of the review to the user's `reviewedMovies`
-
-
+- Created `getTop5MoviesPerGenre()` method in **Movie**
+- Created the method `printTop5MoviesPerGenre()` in the class **Movie** to make it easy to see how the method `getTop5MoviesPerGenre()` works
 ---
