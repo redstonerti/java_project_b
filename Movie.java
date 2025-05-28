@@ -234,33 +234,16 @@ public class Movie implements Printable {
 
     // top 5
     public static Map<String, List<Movie>> getTop5MoviesPerGenre() {
-        // group them by genre
-        Map<String, List<Movie>> genreMap = new HashMap<>();
-
-        // repeat for all movies
-        for (Movie movie : Movie.getAllMovies()) {
-            for (String genre : movie.getGenres()) {
-                genreMap.putIfAbsent(genre, new ArrayList<>());
-                genreMap.get(genre).add(movie);
+        Map<String, List<Movie>> top5MoviesPerGenre = new HashMap<>();
+        for (String genre : moviesByGenre.keySet()) {
+            top5MoviesPerGenre.put(genre, new ArrayList<Movie>());
+            moviesByGenre.get(genre).sort(byAverageRating.reversed());
+            if(moviesByGenre.get(genre).size() > 5) {
+                top5MoviesPerGenre.get(genre).addAll(moviesByGenre.get(genre).subList(0, 5));
+            } else {
+                top5MoviesPerGenre.get(genre).addAll(moviesByGenre.get(genre));
             }
         }
-
-        // Sort and give top 5
-        Map<String, List<Movie>> top5MoviesPerGenre = new HashMap<>();
-        for (Map.Entry<String, List<Movie>> entry : genreMap.entrySet()) {
-            String genre = entry.getKey();
-            List<Movie> moviesInGenre = entry.getValue();
-
-            List<Movie> topMovies = moviesInGenre.stream()
-                    .filter(m -> m.getAverageRating() > 0)
-                    .sorted(Comparator.comparingDouble(Movie::getAverageRating).reversed())
-                    .limit(5)
-                    .collect(Collectors.toList());
-
-            top5MoviesPerGenre.put(genre, topMovies);
-        }
-
         return top5MoviesPerGenre;
     }
-
 }
