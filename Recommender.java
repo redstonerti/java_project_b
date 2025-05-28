@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Recommender {
@@ -13,14 +14,10 @@ public class Recommender {
             }
         }
         List<Movie> moviesToRecommend = new ArrayList<>();
-        List<Movie> userMovies = new ArrayList<>();
-        for (Review review : user.getReviews()) {
-            userMovies.add(review.movie);
-        }
         for (User u : similarUsers) {
-            for (Review review : u.getReviews()) {
-                if (!moviesToRecommend.contains(review.movie) && !userMovies.contains(review.movie)) {
-                    moviesToRecommend.add(review.movie);
+            for (Movie movie : u.getReviewedMovies()) {
+                if (!moviesToRecommend.contains(movie) && !user.getReviewedMovies().contains(movie)) {
+                    moviesToRecommend.add(movie);
                 }
             }
         }
@@ -28,8 +25,70 @@ public class Recommender {
         return moviesToRecommend;
     }
 
+    // Get a hashmap with keys all genres and values the movies passed as an
+    // argument that are in that genre
+    private static HashMap<String, List<Movie>> getHashMapByGenre(List<Movie> movieList) {
+        HashMap<String, List<Movie>> hashMapByGenre = new HashMap<>();
+        for (Movie movie : Movie.getAllMovies()) {
+            for (String genre : movie.getGenres()) {
+                List<Movie> moviesWithThisGenre = hashMapByGenre.get(genre);
+                if (moviesWithThisGenre == null) {
+                    moviesWithThisGenre = new ArrayList<>();
+                }
+                if (!moviesWithThisGenre.contains(movie)) {
+                    moviesWithThisGenre.add(movie);
+                }
+                hashMapByGenre.put(genre, moviesWithThisGenre);
+            }
+        }
+        return hashMapByGenre;
+    }
+
     public static List<Movie> recommendByContent(User user) {
-        return null;
+        if (user == null) {
+            return null;
+        }
+
+        HashMap<String, List<Movie>> moviesByGenre = getHashMapByGenre(Movie.getAllMovies());
+        HashMap<String, List<Movie>> reviewedMoviesByGenre = getHashMapByGenre(user.getReviewedMovies());
+        HashMap<String, Double> genreRatings = new HashMap<>();
+
+        // Calculate average rating for each genre according to the user's reviews
+        for (String genre : reviewedMoviesByGenre.keySet()) {
+            Double sum = 0.;
+            Double movieNumber = 0.;
+            Double averageRatingForThisGenre = 0.;
+            for (Review review : user.getReviews()) {
+                if (review.movie.getGenres().contains(genre)) {
+                    sum += review.rating;
+                    movieNumber += 1;
+                }
+            }
+            averageRatingForThisGenre = movieNumber == 0 ? null : sum / movieNumber;
+            if (averageRatingForThisGenre != null) {
+                genreRatings.put(genre, averageRatingForThisGenre);
+            }
+        }
+        List<Movie> moviesToRecommend = new ArrayList<>();
+        for (String genre : moviesByGenre.keySet()) {
+            for (Movie movie : moviesByGenre.get(genre)) {
+                Double averageRatingForThisGenre = genreRatings.get(genre);
+                if (averageRatingForThisGenre == null) {
+                    continue;
+                }
+                // Add the movie if it doesn't already exist and its rating is higher than the
+                // average rating the user gives to movies of this genre
+                if (true) /* For debug purposes */ {
+                    System.out.println("Genre: " + genre + ", movie: " + movie.getTitle() + ", average genre rating: "
+                            + averageRatingForThisGenre
+                            + ", movie rating: " + movie.getAverageRating());
+                }
+                if (movie.getAverageRating() >= genreRatings.get(genre) && !moviesToRecommend.contains(movie)) {
+                    moviesToRecommend.add(movie);
+                }
+            }
+        }
+        return moviesToRecommend;
     }
 
     public static double calculateMSE(User user1, User user2) {
