@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Movie implements Printable {
     // attributes
@@ -259,5 +258,13 @@ public class Movie implements Printable {
             }
         }
         return highRatedMovies;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Movie)) return false;
+        Movie other = (Movie) obj;
+        return this.title.equals(other.title) && this.year == other.year;
     }
 }

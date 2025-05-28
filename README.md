@@ -98,5 +98,8 @@ java Main
 - Fleshed out `recommendByContent()` in the **Recommender** class
 - Added example of `recommendByContent()` in **Main**
 - Changed `calculateMSE()` function to use getters instead of directly accessing attributes
+- Overridden the method `equals(Object obj)` in the class **Movies**
+- Changed the inside of the `recommendBySimilarity(User user)`, to now only recommend movies that that the similar user have given a rating of more than 7
+- Overridden the method `equals(Object obj)` in the class **User**
 
 ---

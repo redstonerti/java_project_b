@@ -77,4 +77,12 @@ public class User implements Printable {
     public String toString() {
         return username;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof User)) return false;
+        User user = (User) obj;
+        return username.equals(user.username);
+    }
 }
