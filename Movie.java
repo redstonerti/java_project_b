@@ -1,5 +1,12 @@
 import java.util.*;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class Movie implements Printable {
     // attributes
     private String title;
@@ -189,6 +196,37 @@ public class Movie implements Printable {
             }
         }
         return result;
+    }
+
+    // top 5
+    public static Map<String, List<Movie>> getTop5MoviesPerGenre() {
+        // group them by genre
+        Map<String, List<Movie>> genreMap = new HashMap<>();
+
+        // repeat for all movies
+        for (Movie movie : Movie.getAllMovies()) {
+            for (String genre : movie.getGenres()) {
+                genreMap.putIfAbsent(genre, new ArrayList<>());
+                genreMap.get(genre).add(movie);
+            }
+        }
+
+        // Sort and give top 5
+        Map<String, List<Movie>> top5MoviesPerGenre = new HashMap<>();
+        for (Map.Entry<String, List<Movie>> entry : genreMap.entrySet()) {
+            String genre = entry.getKey();
+            List<Movie> moviesInGenre = entry.getValue();
+
+            List<Movie> topMovies = moviesInGenre.stream()
+                    .filter(m -> m.getAverageRating() > 0)
+                    .sorted(Comparator.comparingDouble(Movie::getAverageRating).reversed())
+                    .limit(5)
+                    .collect(Collectors.toList());
+
+            top5MoviesPerGenre.put(genre, topMovies);
+        }
+
+        return top5MoviesPerGenre;
     }
 
 }

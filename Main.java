@@ -141,25 +141,17 @@ public class Main {
 
         DataLoader.loadFromCSV("reviews.csv", ",");
 
-        // >>> Top 5 Stat
-        Map<String, List<Movie>> genreMap = new HashMap<>();
+        System.out.println("Top 5 movies per genre");
+        Map<String, List<Movie>> topMoviesByGenre = Movie.getTop5MoviesPerGenre();
 
-        for (Movie movie : Movie.getAllMovies()) {
-            for (String genre : movie.getGenres()) {
-                genreMap.putIfAbsent(genre, new ArrayList<>());
-                genreMap.get(genre).add(movie);
-            }
-        }
-
-        for (String genre : genreMap.keySet()) {
+        topMoviesByGenre.forEach((genre, movies) -> {
             System.out.println("Top 5 movies in: " + genre);
-            genreMap.get(genre).stream()
-                    .filter(m -> m.getAverageRating() > 0)
-                    .sorted((m1, m2) -> Double.compare(m2.getAverageRating(), m1.getAverageRating()))
-                    .limit(5)
-                    .forEach(m -> System.out.printf("- %s (%.2f)\n", m.getTitle(), m.getAverageRating()));
+            if (movies.isEmpty()) {
+                System.out.println("  No movies found.");
+            } else {
+                movies.forEach(m -> System.out.printf("- %s (%.2f)\n", m.getTitle(), m.getAverageRating()));
+            }
             System.out.println();
-        }
-        // >>> Done with Top 5 Stat
+        });
     }
 }
