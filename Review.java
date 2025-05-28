@@ -24,11 +24,16 @@ public abstract class Review implements Printable {
         user.addReview(this);
         movie.addReview(this);
         allReviews.add(this);
+        movie.addReviewer(user);
+        user.addReviewedMovie(movie);
     }
 
     public Review(User user, int rating, Movie movie) throws Exception {
         if (rating < 1 || rating > 10) {
             throw new Exception("Rating must be between 0 and 10");
+        }
+        if (Review.getSpecificReview(user, movie) != null) {
+            throw new Exception(user.username + " has already made a review for " + movie.getTitle());
         }
         this.user = user;
         this.rating = rating;
@@ -37,6 +42,8 @@ public abstract class Review implements Printable {
         user.addReview(this);
         movie.addReview(this);
         allReviews.add(this);
+        movie.addReviewer(user);
+        user.addReviewedMovie(movie);
     }
 
     // methods
