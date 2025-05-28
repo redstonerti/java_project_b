@@ -124,8 +124,6 @@ public class Movie implements Printable {
         return highestRatedByGenre;
     }
 
-
-
     // print details
     public void printDetails() {
         System.out.println("Title: " + title);
@@ -136,8 +134,8 @@ public class Movie implements Printable {
     }
 
     // getters
-        public List<User> getReviewers() {
-            return new ArrayList<>(reviewers);
+    public List<User> getReviewers() {
+        return new ArrayList<>(reviewers);
     }
 
     public String getTitle() {

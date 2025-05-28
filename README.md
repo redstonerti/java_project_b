@@ -94,4 +94,8 @@ java Main
 - Created `getAverageRating()` in the class **User** which returns the average rating of the user`s reviews
 - Added the `getAverageRating()` in the `printDetails()` of **USER**
 - Created the `getHighRatedMovies()` method in the class **Movie** which returns a list with all movies that got a rating of more than 7 by at least 80% of the reviewers
+- Added private method `getHashMapByGenre()` in the **Recommender** class
+- Fleshed out `recommendByContent()` in the **Recommender** class
+- Added example of `recommendByContent()` in **Main**
+
 ---
