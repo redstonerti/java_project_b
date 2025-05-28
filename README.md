@@ -79,5 +79,6 @@ java Main
 - Changed `moviesByGenre` to a TreeMap so that it is always sorted
 - Added `byReviewCount` Comparator to the **Movie** class
 - Created **Recommender** class with `calculateMSE()` and `arePreferencesSimilar()` functions
+- Fleshed out `recommendByUserSimilarity()` in **Recommender** class
 
 ---

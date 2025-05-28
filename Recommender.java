@@ -1,8 +1,31 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Recommender {
     public static List<Movie> recommendByUserSimilarity(User user) {
-        return null;
+        List<User> similarUsers = new ArrayList<>();
+        for (User u : User.getAllUsers()) {
+            if (u.equals(user)) {
+                continue;
+            }
+            if (arePreferencesSimilar(user, u)) {
+                similarUsers.add(u);
+            }
+        }
+        List<Movie> moviesToRecommend = new ArrayList<>();
+        List<Movie> userMovies = new ArrayList<>();
+        for (Review review : user.getReviews()) {
+            userMovies.add(review.movie);
+        }
+        for (User u : similarUsers) {
+            for (Review review : u.getReviews()) {
+                if (!moviesToRecommend.contains(review.movie) && !userMovies.contains(review.movie)) {
+                    moviesToRecommend.add(review.movie);
+                }
+            }
+        }
+        moviesToRecommend.sort(Movie.byAverageRating);
+        return moviesToRecommend;
     }
 
     public static List<Movie> recommendByContent(User user) {
