@@ -98,5 +98,6 @@ java Main
 - Fleshed out `recommendByContent()` in the **Recommender** class
 - Added example of `recommendByContent()` in **Main**
 - Changed `calculateMSE()` function to use getters instead of directly accessing attributes
+- Overridden the method `equals(Object obj)` in the class **Movies**
 
 ---
