@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Arrays;
+import java.util.List;
 
 public class DataLoader {
-    public static void loadFromCsv(String filePath, String svSplitBy) {
+    public static void loadFromCSV(String filePath, String svSplitBy) {
         String line;
         User user;
         Movie movie;
@@ -17,7 +19,7 @@ public class DataLoader {
 
                 String movieTitle = values[0];
                 int year = Integer.parseInt(values[1]);
-                String genre = values[2];
+                List<String> genres = Arrays.asList(values[2].split("|"));
                 String username = values[3];
                 int rating = Integer.parseInt(values[4]);
                 String comment = values[5];
@@ -31,7 +33,7 @@ public class DataLoader {
 
                 // Find or create the movie
                 if (Movie.getSpecificMovie(movieTitle) == null) {
-                    movie = new Movie(movieTitle, year, genre);
+                    movie = new Movie(movieTitle, year, genres);
                 } else {
                     movie = Movie.getSpecificMovie(movieTitle);
                 }

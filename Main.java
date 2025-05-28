@@ -139,6 +139,6 @@ public class Main {
          * System.out.println("Movies sorted by year: " + movies);
          */
 
-        DataLoader.loadFromCsv("reviews.csv", ",");
+        DataLoader.loadFromCSV("reviews.csv", ",");
     }
 }
