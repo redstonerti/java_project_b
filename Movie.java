@@ -9,6 +9,7 @@ public class Movie implements Printable {
     private List<Review> reviews;
     private List<Movie> relatedMovies;
     private static List<Movie> allMovies = new ArrayList<>();
+    private static HashMap<String, List<Movie>> moviesByGenre = new HashMap<>();
 
     // constructors
     public Movie(String title, int year, List<String> genres, String director) {
@@ -18,6 +19,14 @@ public class Movie implements Printable {
         this.director = director;
         this.reviews = new ArrayList<Review>();
         this.relatedMovies = new ArrayList<Movie>();
+        for (String genre : genres) {
+            List<Movie> currentList = moviesByGenre.get(genre);
+            if (currentList == null) {
+                currentList = new ArrayList<>();
+            }
+            currentList.add(this);
+            moviesByGenre.put(genre, currentList);
+        }
         allMovies.add(this);
     }
 
@@ -27,6 +36,16 @@ public class Movie implements Printable {
 
     public Movie(String title, int year, List<String> genres) {
         this(title, year, genres, "Unknown Director");
+    }
+
+    public static void printMoviesByGenre() {
+        for (String genre : moviesByGenre.keySet()) {
+            System.out.print(genre + ": ");
+            for (Movie movie : moviesByGenre.get(genre)) {
+                System.out.print(movie + ", ");
+            }
+            System.out.println();
+        }
     }
 
     // methods
@@ -139,7 +158,7 @@ public class Movie implements Printable {
 
     public static Movie getSpecificMovie(String title) {
         for (Movie movie : getAllMovies()) {
-            if (movie.getTitle() == title) {
+            if (movie.getTitle().equals(title)) {
                 return movie;
             }
         }
