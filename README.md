@@ -89,6 +89,9 @@ java Main
 - Created `getReviwedMovies()` method **User**
 - Created `addReviewedMovie(Movie m)` method to **User**
 - The **Review** constructors now add the movie of the review to the user's `reviewedMovies`
+- Added private method `getHashMapByGenre()` in the **Recommender** class
+- Fleshed out `recommendByContent()` in the **Recommender** class
+- Added example of `recommendByContent()` in **Main**
 
 
 ---
