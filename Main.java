@@ -140,25 +140,16 @@ public class Main {
          */
 
         DataLoader.loadFromCSV("reviews.csv", ",");
+
         // Movie.printMoviesByGenre();
-        // System.out.println(Recommender.calculateMSE(User.getSpecificUser("singer22"),
-        // User.getSpecificUser("maria89")));
-        //
-        // System.out.println("Top 5 movies per genre");
-        // Map<String, List<Movie>> topMoviesByGenre = Movie.getTop5MoviesPerGenre();
-        //
-        // topMoviesByGenre.forEach((genre, movies) -> {
-        // System.out.println("Top 5 movies in: " + genre);
-        // if (movies.isEmpty()) {
-        // System.out.println(" No movies found.");
-        // } else {
-        // movies.forEach(m -> System.out.printf("- %s (%.2f)\n", m.getTitle(),
-        // m.getAverageRating()));
-        // }
-        // System.out.println();
-        // });
+
         User user = User.getSpecificUser("maria89");
         List<Movie> movies = Recommender.recommendByContent(user);
         System.out.println(movies);
+
+        // Movie.printTop5MoviesPerGenre();
+
+        // User.getSpecificUser("singer22").printDetails();
+        // System.out.println(Movie.getHighRatedMovies());
     }
 }
