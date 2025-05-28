@@ -19,163 +19,126 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         /**
-        // Creates a movie and automatically adds it to the global movie list
-        // (Movie.allMovies)
-        new Movie("Inception", 2010, List.of("Sci-Fi", "Action"), "Christopher Nolan");
+         * // Creates a movie and automatically adds it to the global movie list
+         * // (Movie.allMovies)
+         * new Movie("Inception", 2010, List.of("Sci-Fi", "Action"), "Christopher
+         * Nolan");
+         * 
+         * // More movie creation examples
+         * new Movie("The Matrix", 1999, List.of("Sci-Fi", "Action"), "Lana Wachowski,
+         * Lilly Wachowski");
+         * new Movie("Interstellar", 2014, List.of("Sci-Fi", "Drama"), "Christopher
+         * Nolan");
+         * new Movie("Mad Max: Fury Road", 2015, List.of("Action", "Adventure"), "George
+         * Miller");
+         * new Movie("Blade Runner 2049", 2017, List.of("Sci-Fi", "Mystery"), "Denis
+         * Villeneuve");
+         * new Movie("The Dark Knight", 2008, List.of("Action", "Crime"), "Christopher
+         * Nolan");
+         * new Movie("Family", 2009, List.of("Comedy", "Action"), "Jason Statham");
+         * 
+         * // Get a specific movie from its name
+         * Movie movie = Movie.getSpecificMovie("Family");
+         * 
+         * // Create a User
+         * User user = new User("alice");
+         * 
+         * // The printDetails method can be used to display relevant information
+         * movie.printDetails();
+         * System.out.println();
+         * user.printDetails();
+         * System.out.println();
+         * 
+         * // Create a VerifiedUser and a VerifiedReview from that user.
+         * // The constructors of VerifiedUser and VerifiedReview may throw an
+         * exception,
+         * // so they need to be in a try catch block
+         * // We initialize them before the try catch block so that they can be used
+         * // afterwards
+         * VerifiedUser user2 = null;
+         * VerifiedReview verifiedReview = null;
+         * try {
+         * // A VerifiedUser takes in a VerificationMethod enum in its constructor.
+         * // It is then used in a verify() method which should be implemented by the
+         * users
+         * // of this framework
+         * user2 = new VerifiedUser("bob", VerifiedUser.VerificationMethod.Password);
+         * System.out.println("User created: " + user2.getUsername());
+         * } catch (Exception e) {
+         * System.out.println(e.getMessage());
+         * }
+         * try {
+         * // VerifiedReviews take in a VerifiedUser in their constructor and cannot be
+         * // created otherwise
+         * 
+         * // When a review is created, verified or not, it is automatically added to
+         * the
+         * // reviews list of
+         * // the user that is passed in the constructor, as well as the reviews list of
+         * // the movie that is passed in the constructor
+         * verifiedReview = new VerifiedReview(user2, 3, movie);
+         * } catch (Exception e) {
+         * System.out.println(e.getMessage());
+         * }
+         * 
+         * // If the verifiedReview has been created, the printDetails method can be
+         * used
+         * // to display relevant information
+         * if (verifiedReview != null) {
+         * System.out.println("VerifiedReview created successfully!");
+         * verifiedReview.printDetails();
+         * System.out.println();
+         * }
+         * 
+         * // Similarly, we initialize the BasicReviews in order to have access to them
+         * // after the try catch blocks
+         * BasicReview basicReview2 = null;
+         * BasicReview basicReview = null;
+         * try {
+         * basicReview = new BasicReview(user, 9, movie);
+         * } catch (Exception e) {
+         * System.out.println(e.getMessage());
+         * }
+         * try {
+         * basicReview2 = new BasicReview(user, 8, Movie.getSpecificMovie("The Dark
+         * Knight"));
+         * } catch (Exception e) {
+         * System.out.println(e.getMessage());
+         * }
+         * 
+         * // If they have been created, we print out the relevant information
+         * if (basicReview != null) {
+         * System.out.println("BasicReview created successfully!");
+         * basicReview.printDetails();
+         * System.out.println();
+         * }
+         * 
+         * if (basicReview2 != null) {
+         * System.out.println("Second BasicReview created successfully!");
+         * basicReview2.printDetails();
+         * System.out.println();
+         * }
+         * 
+         * // General usage of methods provided by the framework
+         * System.out.println("Inception total rating: " + movie.getAverageRating());
+         * System.out.println("The highest rated movies for each genre are: " +
+         * Movie.getHighestRatedByGenre());
+         * System.out.println("Related movies for " + movie + ": " +
+         * movie.getRelatedMovies());
+         * System.out.println("Reviewers of " + movie + ": " + movie.getReviewers());
+         * System.out.println(
+         * "The highest rated movies for each genre with at least two reviews and a
+         * minimum rating of 5 are: "
+         * + Movie.getHighestRatedByGenre(2, 5));
+         * 
+         * // Get all the movies
+         * List<Movie> movies = new ArrayList<>(Movie.getAllMovies());
+         * 
+         * // Sort them by year with the byYear Comparator
+         * movies.sort(Movie.byYear);
+         * System.out.println("Movies sorted by year: " + movies);
+         */
 
-        // More movie creation examples
-        new Movie("The Matrix", 1999, List.of("Sci-Fi", "Action"), "Lana Wachowski, Lilly Wachowski");
-        new Movie("Interstellar", 2014, List.of("Sci-Fi", "Drama"), "Christopher Nolan");
-        new Movie("Mad Max: Fury Road", 2015, List.of("Action", "Adventure"), "George Miller");
-        new Movie("Blade Runner 2049", 2017, List.of("Sci-Fi", "Mystery"), "Denis Villeneuve");
-        new Movie("The Dark Knight", 2008, List.of("Action", "Crime"), "Christopher Nolan");
-        new Movie("Family", 2009, List.of("Comedy", "Action"), "Jason Statham");
-
-        // Get a specific movie from its name
-        Movie movie = Movie.getSpecificMovie("Family");
-
-        // Create a User
-        User user = new User("alice");
-
-        // The printDetails method can be used to display relevant information
-        movie.printDetails();
-        System.out.println();
-        user.printDetails();
-        System.out.println();
-
-        // Create a VerifiedUser and a VerifiedReview from that user.
-        // The constructors of VerifiedUser and VerifiedReview may throw an exception,
-        // so they need to be in a try catch block
-        // We initialize them before the try catch block so that they can be used
-        // afterwards
-        VerifiedUser user2 = null;
-        VerifiedReview verifiedReview = null;
-        try {
-            // A VerifiedUser takes in a VerificationMethod enum in its constructor.
-            // It is then used in a verify() method which should be implemented by the users
-            // of this framework
-            user2 = new VerifiedUser("bob", VerifiedUser.VerificationMethod.Password);
-            System.out.println("User created: " + user2.getUsername());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            // VerifiedReviews take in a VerifiedUser in their constructor and cannot be
-            // created otherwise
-
-            // When a review is created, verified or not, it is automatically added to the
-            // reviews list of
-            // the user that is passed in the constructor, as well as the reviews list of
-            // the movie that is passed in the constructor
-            verifiedReview = new VerifiedReview(user2, 3, movie);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        // If the verifiedReview has been created, the printDetails method can be used
-        // to display relevant information
-        if (verifiedReview != null) {
-            System.out.println("VerifiedReview created successfully!");
-            verifiedReview.printDetails();
-            System.out.println();
-        }
-
-        // Similarly, we initialize the BasicReviews in order to have access to them
-        // after the try catch blocks
-        BasicReview basicReview2 = null;
-        BasicReview basicReview = null;
-        try {
-            basicReview = new BasicReview(user, 9, movie);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            basicReview2 = new BasicReview(user, 8, Movie.getSpecificMovie("The Dark Knight"));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        // If they have been created, we print out the relevant information
-        if (basicReview != null) {
-            System.out.println("BasicReview created successfully!");
-            basicReview.printDetails();
-            System.out.println();
-        }
-
-        if (basicReview2 != null) {
-            System.out.println("Second BasicReview created successfully!");
-            basicReview2.printDetails();
-            System.out.println();
-        }
-
-        // General usage of methods provided by the framework
-        System.out.println("Inception total rating: " + movie.getAverageRating());
-        System.out.println("The highest rated movies for each genre are: " + Movie.getHighestRatedByGenre());
-        System.out.println("Related movies for " + movie + ": " + movie.getRelatedMovies());
-        System.out.println("Reviewers of " + movie + ": " + movie.getReviewers());
-        System.out.println(
-                "The highest rated movies for each genre with at least two reviews and a minimum rating of 5 are: "
-                        + Movie.getHighestRatedByGenre(2, 5));
-
-        // Get all the movies
-        List<Movie> movies = new ArrayList<>(Movie.getAllMovies());
-
-        // Sort them by year with the byYear Comparator
-        movies.sort(Movie.byYear);
-        System.out.println("Movies sorted by year: " + movies);
-        */
-
-        String csvFile = "reviews.csv";
-        String line;
-        String svSplitBy = ",";
-        User user;
-        Movie movie;
-        Review review;
-
-        // Read the CSV file and process each line
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            // Skip the header line
-            br.readLine();
-            while ((line = br.readLine()) != null) {
-                // Split the line by the specified delimiter
-                String[] values = line.split(svSplitBy);
-
-                String movieTitle = values[0];
-                int year = Integer.parseInt(values[1]);
-                String genre = values[2];
-                String username = values[3];
-                int rating = Integer.parseInt(values[4]);
-                String comment = values[5];
-
-                // Find or create the user
-                if (User.getSpecificUser(username) == null) {
-                    user = new User(username);
-                    // user.printDetails();
-                    // System.out.println();
-                }else {
-                    user = User.getSpecificUser(username);
-                }
-
-                // Find or create the movie
-                if (Movie.getSpecificMovie(movieTitle) == null) {
-                    movie = new Movie(movieTitle, year, genre);
-                    // movie.printDetails();
-                    // System.out.println();
-                }else {
-                    movie = Movie.getSpecificMovie(movieTitle);
-                }
-
-                // Find or Create a review
-                if (Review.getSpecificReview(user, movie) == null) {
-                    review = new BasicReview(user, rating, comment, movie);
-                    // review.printDetails();
-                    // System.out.println();
-                } else {
-                    review = Review.getSpecificReview(user, movie);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Error reading CSV file: " + e.getMessage());
-        }
+        DataLoader.loadFromCsv("reviews.csv", ",");
     }
 }
