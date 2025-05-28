@@ -10,7 +10,7 @@ public class Movie implements Printable {
     private List<Movie> relatedMovies;
     private static List<Movie> allMovies = new ArrayList<>();
 
-    // constructor
+    // constructors
     public Movie(String title, int year, List<String> genres, String director) {
         this.title = title;
         this.year = year;
@@ -19,6 +19,10 @@ public class Movie implements Printable {
         this.reviews = new ArrayList<Review>();
         this.relatedMovies = new ArrayList<Movie>();
         allMovies.add(this);
+    }
+
+    public Movie(String title, int year, String genre){
+        this(title, year, List.of(genre), "Unknown Director");
     }
 
     // methods

@@ -4,11 +4,13 @@ public class User implements Printable {
     // attributes
     protected String username;
     protected List<Review> reviews;
+    protected static List<User> allUsers = new ArrayList<>();
 
     // constructor
     public User(String username) {
         this.username = username;
         this.reviews = new ArrayList<Review>();
+        allUsers.add(this);
     }
 
     // methods
@@ -29,6 +31,19 @@ public class User implements Printable {
 
     public List<Review> getReviews() {
         return new ArrayList<>(reviews);
+    }
+
+    public static List<User> getAllUsers() {
+        return new ArrayList<>(allUsers);
+    }
+
+    public static User getSpecificUser(String username) {
+        for (User user : allUsers) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     // toString

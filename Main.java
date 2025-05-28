@@ -14,9 +14,11 @@
 //epitheto: FITIKIDES
 
 import java.util.*;
+import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
+        /**
         // Creates a movie and automatically adds it to the global movie list
         // (Movie.allMovies)
         new Movie("Inception", 2010, List.of("Sci-Fi", "Action"), "Christopher Nolan");
@@ -121,5 +123,59 @@ public class Main {
         // Sort them by year with the byYear Comparator
         movies.sort(Movie.byYear);
         System.out.println("Movies sorted by year: " + movies);
+        */
+
+        String csvFile = "reviews.csv";
+        String line;
+        String svSplitBy = ",";
+        User user;
+        Movie movie;
+        Review review;
+
+        // Read the CSV file and process each line
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            // Skip the header line
+            br.readLine();
+            while ((line = br.readLine()) != null) {
+                // Split the line by the specified delimiter
+                String[] values = line.split(svSplitBy);
+
+                String movieTitle = values[0];
+                int year = Integer.parseInt(values[1]);
+                String genre = values[2];
+                String username = values[3];
+                int rating = Integer.parseInt(values[4]);
+                String comment = values[5];
+
+                // Find or create the user
+                if (User.getSpecificUser(username) == null) {
+                    user = new User(username);
+                    // user.printDetails();
+                    // System.out.println();
+                }else {
+                    user = User.getSpecificUser(username);
+                }
+
+                // Find or create the movie
+                if (Movie.getSpecificMovie(movieTitle) == null) {
+                    movie = new Movie(movieTitle, year, genre);
+                    // movie.printDetails();
+                    // System.out.println();
+                }else {
+                    movie = Movie.getSpecificMovie(movieTitle);
+                }
+
+                // Find or Create a review
+                if (Review.getSpecificReview(user, movie) == null) {
+                    review = new BasicReview(user, rating, comment, movie);
+                    // review.printDetails();
+                    // System.out.println();
+                } else {
+                    review = Review.getSpecificReview(user, movie);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading CSV file: " + e.getMessage());
+        }
     }
 }
