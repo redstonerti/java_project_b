@@ -115,7 +115,7 @@ java Main
 - Complete main rework to increase clarity and decrease clutter
 
 ## Sample Output
-```bash
+```console
 --- User creation example ---
 User alice was created successfully!
 
