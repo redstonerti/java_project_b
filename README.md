@@ -1,10 +1,10 @@
 # JAVA PROJECT B AUEB
 
 ## Index
-- [Demo / Usage](#user-creation-example)
-- [Design](#movie-details-example)
-- [Documentation of the Development Process](#movie-details-example)
-- [Sample Output](#movie-details-example)
+- [Demo / Usage](#demo--usage)
+- [Design](#design)
+- [Documentation of the Development Process](#documentation-of-the-development-process)
+- [Sample Output](#sample-output)
 
 ## Demo / Usage
 To see a complete example of this framework:
