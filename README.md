@@ -111,3 +111,4 @@ java Main
 - Put `try_catch` in places where the functions now throw exceptions
 - Added comments in main to explain what each function does
 - Changed `printDetails()` in **User** and getAverageRating() example for the movie inception to print the average with 2 decimals of accuracy
+- Completely reworked the `recommendByContent()` method of the **Recommender** class

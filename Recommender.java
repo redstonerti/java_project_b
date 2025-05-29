@@ -1,6 +1,22 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+
+//Custom Comparator to sort movies based on a user's genre weight and their rating
+class ContentRecommendorComparator implements Comparator<Movie> {
+    private User user;
+
+    public ContentRecommendorComparator(User user) {
+        this.user = user;
+    }
+
+    public int compare(Movie m1, Movie m2) {
+        return m1.getAverageRating() * Recommender.getAverageGenreWeightByUser(m1, user) > m2.getAverageRating()
+                * Recommender.getAverageGenreWeightByUser(m2, user) ? -1
+                        : 1;
+    }
+}
 
 public class Recommender {
     public static List<Movie> recommendByUserSimilarity(User user) {
@@ -45,12 +61,14 @@ public class Recommender {
         return hashMapByGenre;
     }
 
-    public static List<Movie> recommendByContent(User user) {
-        if (user == null) {
-            return null;
+    public static double getAverageGenreWeightByUser(Movie movie, User user) {
+        if (movie.getGenres().size() == 0) {
+            return 0.;
+        }
+        if (user.getReviewedMovies().size() == 0) {
+            return 0.;
         }
 
-        HashMap<String, List<Movie>> moviesByGenre = getHashMapByGenre(Movie.getAllMovies());
         HashMap<String, List<Movie>> reviewedMoviesByGenre = getHashMapByGenre(user.getReviewedMovies());
         HashMap<String, Double> genreRatings = new HashMap<>();
 
@@ -70,27 +88,27 @@ public class Recommender {
                 genreRatings.put(genre, averageRatingForThisGenre);
             }
         }
-        System.out.println("Genre ratings: ");
-        System.out.println(genreRatings);
-        List<Movie> moviesToRecommend = new ArrayList<>();
-        for (String genre : moviesByGenre.keySet()) {
-            for (Movie movie : moviesByGenre.get(genre)) {
-                Double averageRatingForThisGenre = genreRatings.get(genre);
-                if (averageRatingForThisGenre == null) {
-                    continue;
-                }
-                // Add the movie if it doesn't already exist and its rating is higher than the
-                // average rating the user gives to movies of this genre
-                if (true) /* For debug purposes */ {
-                    System.out.println("Genre: " + genre + ", movie: " + movie.getTitle() + ", average genre rating: "
-                            + averageRatingForThisGenre
-                            + ", movie rating: " + movie.getAverageRating());
-                }
-                if (movie.getAverageRating() >= genreRatings.get(genre) && !moviesToRecommend.contains(movie)
-                        && !user.getReviewedMovies().contains(movie)) {
-                    moviesToRecommend.add(movie);
-                }
+
+        double sum = 0;
+        int total = 0;
+        for (String genre : movie.getGenres()) {
+            Double userRatingForGenre = genreRatings.get(genre);
+            if (userRatingForGenre != null) {
+                sum += userRatingForGenre / 10.;
+                total += 1;
             }
+        }
+        return total == 0 ? 0.5 : sum / (double) total;
+    }
+
+    public static List<Movie> recommendByContent(User user, int numberOfMovies) {
+        if (user == null) {
+            return null;
+        }
+        List<Movie> moviesToRecommend = Movie.getAllMovies();
+        moviesToRecommend.sort(new ContentRecommendorComparator(user));
+        if (moviesToRecommend.size() > numberOfMovies) {
+            moviesToRecommend.subList(5, moviesToRecommend.size()).clear();
         }
         return moviesToRecommend;
     }
