@@ -9,7 +9,7 @@ public abstract class Review implements Printable {
     protected double weight;
     protected static List<Review> allReviews = new ArrayList<>();
 
-    // constructor
+    // constructors
     public Review(User user, int rating, String comment, Movie movie) throws Exception {
         if (rating < 1 || rating > 10) {
             throw new Exception("Rating must be between 0 and 10");
@@ -47,18 +47,17 @@ public abstract class Review implements Printable {
     }
 
     // methods
-    public int getWeightedRating() {
-        return (int) Math.round((float) this.getRating() * this.weight);
-    }
-
-    public double getWeight() {
-        return this.weight;
-    }
-
     // print details
     public void printDetails() {
         System.out.println(user.getUsername() + " rated " + movie.getTitle() + " with " + rating + "/10"
                 + ((comment != null && !comment.isEmpty()) ? "\nComment: " + comment : ""));
+    }
+
+    // toString
+    @Override
+    public String toString() {
+        return user.getUsername() + " rated " + movie.getTitle() + " with " + rating + "/10"
+                + ((comment != null && !comment.isEmpty()) ? "\nComment: " + comment : "");
     }
 
     // getters
@@ -82,6 +81,15 @@ public abstract class Review implements Printable {
         return new ArrayList<>(allReviews);
     }
 
+    public double getWeight() {
+        return this.weight;
+    }
+
+    // other methods
+    public int getWeightedRating() {
+        return (int) Math.round((float) this.getRating() * this.weight);
+    }
+
     public static Review getSpecificReview(User user, Movie movie) {
         for (Review review : allReviews) {
             if (review.getUser().equals(user) && review.getMovie().equals(movie)) {
@@ -91,10 +99,5 @@ public abstract class Review implements Printable {
         return null;
     }
 
-    // toString
-    @Override
-    public String toString() {
-        return user.getUsername() + " rated " + movie.getTitle() + " with " + rating + "/10"
-                + ((comment != null && !comment.isEmpty()) ? "\nComment: " + comment : "");
-    }
+
 }
