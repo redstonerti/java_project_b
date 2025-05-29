@@ -101,5 +101,6 @@ java Main
 - Overridden the method `equals(Object obj)` in the class **Movies**
 - Changed the inside of the `recommendBySimilarity(User user)`, to now only recommend movies that that the similar user have given a rating of more than 7
 - Overridden the method `equals(Object obj)` in the class **User**
+- Made `recommendByContent()` check if user has already seen the movie and changed `getHashMapByGenre()` to use the movieList passed as an argument
 
 ---

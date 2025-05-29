@@ -17,7 +17,7 @@ public class Recommender {
         for (User u : similarUsers) {
             for (Movie movie : u.getReviewedMovies()) {
                 if (!moviesToRecommend.contains(movie) && !user.getReviewedMovies().contains(movie) &&
-                Review.getSpecificReview(u, movie).getRating() > 7) {
+                        Review.getSpecificReview(u, movie).getRating() > 7) {
                     moviesToRecommend.add(movie);
                 }
             }
@@ -30,7 +30,7 @@ public class Recommender {
     // argument that are in that genre
     private static HashMap<String, List<Movie>> getHashMapByGenre(List<Movie> movieList) {
         HashMap<String, List<Movie>> hashMapByGenre = new HashMap<>();
-        for (Movie movie : Movie.getAllMovies()) {
+        for (Movie movie : movieList) {
             for (String genre : movie.getGenres()) {
                 List<Movie> moviesWithThisGenre = hashMapByGenre.get(genre);
                 if (moviesWithThisGenre == null) {
@@ -84,7 +84,8 @@ public class Recommender {
                             + averageRatingForThisGenre
                             + ", movie rating: " + movie.getAverageRating());
                 }
-                if (movie.getAverageRating() >= genreRatings.get(genre) && !moviesToRecommend.contains(movie)) {
+                if (movie.getAverageRating() >= genreRatings.get(genre) && !moviesToRecommend.contains(movie)
+                        && !user.getReviewedMovies().contains(movie)) {
                     moviesToRecommend.add(movie);
                 }
             }
