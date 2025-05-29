@@ -70,6 +70,8 @@ public class Recommender {
                 genreRatings.put(genre, averageRatingForThisGenre);
             }
         }
+        System.out.println("Genre ratings: ");
+        System.out.println(genreRatings);
         List<Movie> moviesToRecommend = new ArrayList<>();
         for (String genre : moviesByGenre.keySet()) {
             for (Movie movie : moviesByGenre.get(genre)) {

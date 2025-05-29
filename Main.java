@@ -154,14 +154,14 @@ public class Main {
         maria.printDetails();
 
         // Get a list of movies recommended by the content a specific user watches
-        List<Movie> moviesRecommendedByContent = Recommender.recommendByContent(user);
+        List<Movie> moviesRecommendedByContent = Recommender.recommendByContent(maria);
         System.out.println("--- Movies recommended by content for maria ---");
         System.out.println(moviesRecommendedByContent);
         System.out.println();
 
         // Get a list of movies recommended by finding movies in genres that other users
         // rated similarly to the one given
-        List<Movie> moviesRecommendedBySimilarity = Recommender.recommendByUserSimilarity(user);
+        List<Movie> moviesRecommendedBySimilarity = Recommender.recommendByUserSimilarity(maria);
         System.out.println("--- Movies recommended by similarity for maria ---");
         System.out.println(moviesRecommendedBySimilarity);
         System.out.println();
