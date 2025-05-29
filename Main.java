@@ -158,22 +158,18 @@ public class Main {
         System.out.println(Recommender.getAverageGenreWeightByUser(pulp, john));
 
         // Get a list of movies recommended by the content a specific user watches
-
+        System.out.println("--- Movies recommended by content for john ---");
         for (Movie m : Recommender.recommendByContent(john, 5)) {
             System.out.printf(
                     "%s: %.2f%n", m.getTitle(),
                     Recommender.getAverageGenreWeightByUser(m, john) * m.getAverageRating());
         }
-
-        List<Movie> moviesRecommendedByContent = Recommender.recommendByContent(john, 5);
-        System.out.println("--- Movies recommended by content for maria ---");
-        System.out.println(moviesRecommendedByContent);
         System.out.println();
 
         // Get a list of movies recommended by finding movies in genres that other users
         // rated similarly to the one given
         List<Movie> moviesRecommendedBySimilarity = Recommender.recommendByUserSimilarity(john);
-        System.out.println("--- Movies recommended by similarity for maria ---");
+        System.out.println("--- Movies recommended by similarity for john ---");
         System.out.println(moviesRecommendedBySimilarity);
         System.out.println();
 
@@ -186,9 +182,6 @@ public class Main {
         System.out.println("--- Highest rated movies ---");
         List<Movie> highestRatedMovies = Movie.getHighRatedMovies();
         System.out.println(highestRatedMovies);
-
-        System.out.println("\n\n\n");
-        System.out.println("--- Testing ---");
 
     }
 }
