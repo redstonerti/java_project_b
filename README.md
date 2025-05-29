@@ -58,6 +58,8 @@ java Main
 
 ## Documentation of the Development Process
 
+### DAY 1
+
 - Commented out the previous **Main** so we can now  the use the new methods that we will create
 - Created `allReviews` attribute in the class **Review**
 - The constructors now add every review objects that get created to the `allReviews` list
@@ -69,9 +71,9 @@ java Main
 - Created the corresponding movie, user and review objects in **Main** according to the given `reviews.csv` file
 - Made `Review` constructor throw exception if a review already exists for the specified user and movie
 - Created **DataLoader** class as specified by the UML diagram and moved file input logic there
-- Made `loadFromCSV()` split movie genres by this `|` delimiter
+- Made `loadReviewsFromCSV()` split movie genres by this `|` delimiter
 - Changed `getSpecificMovie()` to compare with the `.equals()` method
-- Changed `.split("|")` to `.split("\\|")` in `loadFromCSV` in order to escape the pipe from regex
+- Changed `.split("|")` to `.split("\\|")` in `loadReviewsFromCSV` in order to escape the pipe from regex
 - Created `moviesByGenre` treemap and made the constructor of Movie add itself to it
 - Added `printMoviesByGenre()` in the **Movie** class to make it easy to see how the hashmap works
 - Changed `moviesByGenre` to a TreeMap so that it is always sorted
@@ -101,6 +103,12 @@ java Main
 - Overridden the method `equals(Object obj)` in the class **Movies**
 - Changed the inside of the `recommendBySimilarity(User user)`, to now only recommend movies that that the similar user have given a rating of more than 7
 - Overridden the method `equals(Object obj)` in the class **User**
-- Made `recommendByContent()` check if user has already seen the movie and changed `getHashMapByGenre()` to use the movieList passed as an argument
 
----
+### DAY 2
+- Made `recommendByContent()` check if user has already seen the movie and changed `getHashMapByGenre()` to use the movieList passed as an argument
+- Uncommented **Main**
+- Renamed `loadFromCSV()` to `loadReviewsFromCSV`
+- Put `try_catch` in places where the functions now throw exceptions
+- Added comments in main to explain what each function does
+- Changed `printDetails()` in **User** and getAverageRating() example for the movie inception to print the average with 2 decimals of accuracy
+- Completely reworked the `recommendByContent()` method of the **Recommender** class

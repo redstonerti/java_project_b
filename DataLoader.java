@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DataLoader {
-    public static void loadFromCSV(String filePath, String svSplitBy) {
+    public static void loadReviewsFromCSV(String filePath, String svSplitBy) {
         String line;
         User user;
         Movie movie;
