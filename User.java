@@ -10,7 +10,7 @@ public class User implements Printable {
     // constructor
     public User(String username) throws Exception {
         if (User.getSpecificUser(username) != null) {
-            throw new Exception("user" + username + "  already exiists ");
+            throw new Exception("user" + username + "  already exists ");
         }
         this.username = username;
         this.reviews = new ArrayList<Review>();
@@ -42,7 +42,7 @@ public class User implements Printable {
     public void printDetails() {
         System.out.println("User: " + username);
         System.out.println("Reviews submitted: " + reviews.size());
-        System.out.println("Average rating: " + getAverageRating());
+        System.out.printf("Average rating: %.2f%n", getAverageRating());
     }
 
     // getters
@@ -80,8 +80,10 @@ public class User implements Printable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof User)) return false;
+        if (this == obj)
+            return true;
+        if (!(obj instanceof User))
+            return false;
         User user = (User) obj;
         return username.equals(user.username);
     }
