@@ -1,5 +1,11 @@
 # JAVA PROJECT B AUEB
 
+## Index
+- [Demo / Usage](#demo--usage)
+- [Design](#design)
+- [Documentation of the Development Process](#documentation-of-the-development-process)
+- [Sample Output](#sample-output)
+
 ## Demo / Usage
 To see a complete example of this framework:
 
