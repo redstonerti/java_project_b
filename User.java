@@ -19,6 +19,7 @@ public class User implements Printable {
     }
 
     // methods
+    // adders
     public void addReview(Review r) {
         reviews.add(r);
     }
@@ -27,15 +28,21 @@ public class User implements Printable {
         reviewedMovies.add(m);
     }
 
-    public double getAverageRating() {
-        if (reviews.isEmpty()) {
-            return 0.0;
-        }
-        double totalRating = 0.0;
-        for (Review review : reviews) {
-            totalRating += review.getRating();
-        }
-        return totalRating / reviews.size();
+    // toString
+    @Override
+    public String toString() {
+        return username;
+    }
+
+    // equals
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof User))
+            return false;
+        User user = (User) obj;
+        return username.equals(user.username);
     }
 
     // print details
@@ -46,7 +53,6 @@ public class User implements Printable {
     }
 
     // getters
-
     public List<Movie> getReviewedMovies() {
         return new ArrayList<>(reviewedMovies);
     }
@@ -63,6 +69,7 @@ public class User implements Printable {
         return new ArrayList<>(allUsers);
     }
 
+    //other methods
     public static User getSpecificUser(String username) {
         for (User user : allUsers) {
             if (user.getUsername().equals(username)) {
@@ -72,19 +79,14 @@ public class User implements Printable {
         return null;
     }
 
-    // toString
-    @Override
-    public String toString() {
-        return username;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof User))
-            return false;
-        User user = (User) obj;
-        return username.equals(user.username);
+    public double getAverageRating() {
+        if (reviews.isEmpty()) {
+            return 0.0;
+        }
+        double totalRating = 0.0;
+        for (Review review : reviews) {
+            totalRating += review.getRating();
+        }
+        return totalRating / reviews.size();
     }
 }

@@ -113,7 +113,7 @@ public class Recommender {
         return moviesToRecommend;
     }
 
-    public static double calculateMSE(User user1, User user2) {
+    private static double calculateMSE(User user1, User user2) {
         double sum = 0;
         int commonMovies = 0;
         for (Review review1 : user1.getReviews()) {
@@ -133,7 +133,7 @@ public class Recommender {
         }
     }
 
-    public static boolean arePreferencesSimilar(User user1, User user2) {
+    private static boolean arePreferencesSimilar(User user1, User user2) {
         double mse = calculateMSE(user1, user2);
         if (mse < 0) {
             return false;

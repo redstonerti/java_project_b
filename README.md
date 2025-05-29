@@ -13,7 +13,8 @@ Open `Main.java`.
 Inside you’ll find:
 - Creation of several `Movie` objects.
 - Examples of `User`, `BasicReview`, and `VerifiedReview` usage.
-- Calls to helper methods like `getAverageRating()`, `getHighestRatedByGenre()`, etc.
+- The use of the DataLoader, creating the corresponding objects of the **reviews.csv** file.
+- Calls to helper methods like `getAverageRating()`, `getHighestRatedByGenre()`, `getTop5MoviesPerGenre()`, etc.
 - Inline comments explaining each step, for instance:
   ```java
   // Creates a movie and automatically adds it to the global movie list
@@ -51,16 +52,30 @@ java Main
 
 **Exception Handling**
 - Validation in constructors
-- Try catch is used to create the objects safely
+- Try catch is used to create the objects safely and inside of the **DataLoader**
 
 **Methods**
 - `printDetails()` to print relevant details for **Movies**, **Users** and **Reviews**
-- `getAverageRating()`
-- `getHighestRatedByGenre()` (overload exists with filters for minimum reviewer amount and minimum rating)
-- `getRelatedMovies()`
-- `getReviewers()`
-- Sorting with the Comparators `byYear`, `byAverageRating` or `byTitle`
-- Search for movies with `searchByYear()`, `searchByDirector()` or `searchByGenre()`
+- **Movie**
+  - `getAverageRating()`
+  - `getHighestRatedByGenre()` (overload exists with filters for minimum reviewer amount and minimum rating)
+  - `getRelatedMovies()`
+  - `getReviewers()`
+  - `getHighRatedMovies()`
+  - `getTop5MoviesPerGenre()`
+  - Search for movies with `searchByYear()`, `searchByDirector()` or `searchByGenre()`
+  - Sorting with the Comparators `byYear`, `byAverageRating`,  `byTitle`, `byReviewCount`
+- **User**
+  - `getAverageRating()`
+- **Review**
+  - `getWeightedRating()`
+- **Recommender**
+  - `recommendByUserSimilarity(User user)`
+  - `getAverageGenreWeightByUser(Movie movie, User user)`
+  - `recommendByContent(User user, int numberOfMovies)`
+  - Sorting with the Comparator `ContentRecommendorComparator`
+- **DataLoader**
+  - `loadReviewsFromCSV(String filePath, String svSplitBy)`
 
 ## Documentation of the Development Process
 
