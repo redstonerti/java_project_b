@@ -113,3 +113,110 @@ java Main
 - Changed `printDetails()` in **User** and getAverageRating() example for the movie inception to print the average with 2 decimals of accuracy
 - Completely reworked the `recommendByContent()` method of the **Recommender** class
 - Complete main rework to increase clarity and decrease clutter
+
+## Sample Output
+```bash
+--- User creation example ---
+User alice was created successfully!
+
+--- Movie details example ---
+Title: Family
+Year: 2009
+Genres: [Comedy, Action]
+Director: Jason Statham
+Average Rating: 0.0
+
+--- User details example ---
+User: alice
+Reviews submitted: 0
+Average rating: 0.00
+
+--- Verified Review and Verified User example ---
+VerifiedUser bob was created succesfully!
+VerifiedReview created successfully!
+bob rated Family with 3/10
+
+--- BasicReview example ---
+BasicReview by alice created successfully!
+Second BasicReview by alice created successfully!
+alice rated Family with 9/10
+alice rated The Dark Knight with 8/10
+
+--- General method usage examples ---
+Average Rating of a movie                                 | Inception total rating: 5.65
+Highest Rated movies by a genre                           | The highest rated movies for each genre are: {Sci-Fi=Inception, Action=The Dark Knight, Adventure=Mad Max: Fury Road, Drama=Interstellar, Crime=The Dark Knight, Mystery=Blade Runner 2049, Comedy=Family}
+Related movies for Family:                                | [Inception, The Matrix, Mad Max: Fury Road, The Dark Knight]
+Reviewers of Family:                                      | [bob, alice]
+The highest rated movies for each genre
+with at least two reviews and a minimum rating of 5 are:  | {Action=Family, Comedy=Family}
+Movies sorted by year                                     | [The Matrix, The Dark Knight, Family, Inception, Interstellar, Mad Max: Fury Road, Blade Runner 2049]
+
+--- Print movies by genre example ---
+Action: Inception, The Matrix, Mad Max: Fury Road, The Dark Knight, Family,
+Adventure: Mad Max: Fury Road,
+Comedy: Family,
+Crime: The Dark Knight, The Godfather, Pulp Fiction,
+Drama: Interstellar,
+Musical: La La Land, The Greatest Showman,
+Mystery: Blade Runner 2049,
+Sci-Fi: Inception, The Matrix, Interstellar, Blade Runner 2049,
+
+--- Genre weight demonstration ---
+Average genre weight for pulp fiction based on reviews by john: : 0.5
+Average genre weight for pulp fiction based on reviews by maria: : 0.9
+
+--- Movies recommended by content for john ---
+Mad Max: Fury Road: 8.10
+Inception: 7.95
+The Matrix: 7.95
+Interstellar: 7.50
+The Dark Knight: 7.20
+
+--- Movies recommended by similarity for john ---
+[The Godfather]
+
+--- Top 5 movies by genre ---
+Top 5 movies in: Action
+- Inception (9.00)
+- The Matrix (9.00)
+- Mad Max: Fury Road (9.00)
+- The Dark Knight (8.00)
+- Family (5.65)
+
+Top 5 movies in: Sci-Fi
+- Inception (9.00)
+- The Matrix (9.00)
+- Interstellar (9.00)
+- Blade Runner 2049 (0.00)
+
+Top 5 movies in: Adventure
+- Mad Max: Fury Road (9.00)
+
+Top 5 movies in: Drama
+- Interstellar (9.00)
+
+Top 5 movies in: Crime
+- The Godfather (9.00)
+- Pulp Fiction (8.67)
+- The Dark Knight (8.00)
+
+Top 5 movies in: Comedy
+- Family (5.65)
+
+Top 5 movies in: Mystery
+- Blade Runner 2049 (0.00)
+
+Top 5 movies in: Musical
+- The Greatest Showman (9.00)
+- La La Land (8.67)
+
+--- Highest rated movies ---
+Inception: 9.00
+The Matrix: 9.00
+Interstellar: 9.00
+Mad Max: Fury Road: 9.00
+The Greatest Showman: 9.00
+The Godfather: 9.00
+Pulp Fiction: 8.67
+The Dark Knight: 8.00
+```
