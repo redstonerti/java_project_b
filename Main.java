@@ -17,10 +17,11 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Creates a movie and automatically adds it to the global movie list
-        // (Movie.allMovies)
-
+        // Movie creating can fail, so it is recommended to put them in a try catch
+        // block
         try {
+            // Creates a movie and automatically adds it to the global movie list
+            // (Movie.allMovies)
             new Movie("Inception", 2010, List.of("Sci-Fi", "Action"), "Christopher Nolan");
 
             // More movie creation examples
@@ -42,17 +43,23 @@ public class Main {
         // The constructor of User throw an exception so it need to be in a try catch
         // block. We initialize it before the try catch block so that it can be used
         // afterwards
+        System.out.println("--- User creation example ---");
         User user;
         try {
             user = new User("alice");
+            System.out.println("User " + user.username + " was created successfully!");
         } catch (Exception e) {
             System.out.println("Exception when creating alice: " + e);
             return;
         }
+        System.out.println();
 
         // The printDetails method can be used to display relevant information
+        System.out.println("--- Movie details example ---");
         movie.printDetails();
         System.out.println();
+
+        System.out.println("--- User details example ---");
         user.printDetails();
         System.out.println();
 
@@ -61,16 +68,17 @@ public class Main {
         // so they need to be in a try catch block
         // We initialize them before the try catch block so that they can be used
         // afterwards
-        VerifiedUser user2 = null;
+        System.out.println("--- Verified Review and Verified User example ---");
+        VerifiedUser verifiedUser = null;
         VerifiedReview verifiedReview = null;
         try {
             // A VerifiedUser takes in a VerificationMethod enum in its constructor.
             // It is then used in a verify() method which should be implemented by the users
             // of this framework
-            user2 = new VerifiedUser("bob", VerifiedUser.VerificationMethod.Password);
-            System.out.println("User created: " + user2.getUsername());
+            verifiedUser = new VerifiedUser("bob", VerifiedUser.VerificationMethod.Password);
+            System.out.println("VerifiedUser " + verifiedUser.username + " was created succesfully!");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Exception when creating VerifiedUser: " + e.getMessage());
         }
         try {
             // VerifiedReviews take in a VerifiedUser in their constructor and cannot be
@@ -80,64 +88,70 @@ public class Main {
             // reviews list of
             // the user that is passed in the constructor, as well as the reviews list of
             // the movie that is passed in the constructor
-            verifiedReview = new VerifiedReview(user2, 3, movie);
+            verifiedReview = new VerifiedReview(verifiedUser, 3, movie);
+            System.out.println("VerifiedReview created successfully!");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("Exception when creating VerifiedReview: " + e.getMessage());
         }
 
         // If the verifiedReview has been created, the printDetails method can be used
         // to display relevant information
         if (verifiedReview != null) {
-            System.out.println("VerifiedReview created successfully!");
             verifiedReview.printDetails();
             System.out.println();
         }
 
         // Similarly, we initialize the BasicReviews in order to have access to them
         // after the try catch blocks
-        BasicReview basicReview2 = null;
+        System.out.println("--- BasicReview example ---");
         BasicReview basicReview = null;
+        BasicReview basicReview2 = null;
         try {
             basicReview = new BasicReview(user, 9, movie);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try {
+            System.out.println("BasicReview by " + basicReview.user.username + " created successfully!");
+
             basicReview2 = new BasicReview(user, 8, Movie.getSpecificMovie("The Dark Knight"));
+            System.out.println("Second BasicReview by " + basicReview2.user.username + " created successfully!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         // If they have been created, we print out the relevant information
         if (basicReview != null) {
-            System.out.println("BasicReview created successfully!");
             basicReview.printDetails();
-            System.out.println();
         }
-
         if (basicReview2 != null) {
-            System.out.println("Second BasicReview created successfully!");
             basicReview2.printDetails();
-            System.out.println();
         }
+        System.out.println();
 
         // General usage of methods provided by the framework
-        System.out.printf("Inception total rating: %.2f%n", movie.getAverageRating());
-        System.out.println("The highest rated movies for each genre are: " +
-                Movie.getHighestRatedByGenre());
-        System.out.println("Related movies for " + movie + ": " +
-                movie.getRelatedMovies());
-        System.out.println("Reviewers of " + movie + ": " + movie.getReviewers());
-        System.out.println(
-                "The highest rated movies for each genre with at least two reviews and a minimum rating of 5 are: "
-                        + Movie.getHighestRatedByGenre(2, 5));
+        System.out.println("--- General method usage examples ---");
+        int padding = 57;
+
+        System.out.printf("%-" + padding + "s | Inception total rating: %.2f%n",
+                "Average Rating of a movie", movie.getAverageRating());
+
+        System.out.printf("%-" + padding + "s | The highest rated movies for each genre are: %s%n",
+                "Highest Rated movies by a genre", Movie.getHighestRatedByGenre());
+
+        System.out.printf("%-" + padding + "s | %s%n",
+                "Related movies for " + movie + ":", movie.getRelatedMovies());
+
+        System.out.printf("%-" + padding + "s | %s%n",
+                "Reviewers of " + movie + ":", movie.getReviewers());
+
+        System.out.printf("The highest rated movies for each genre\n" + "%-" + padding + "s | %s%n",
+                "with at least two reviews and a minimum rating of 5 are:",
+                Movie.getHighestRatedByGenre(2, 5));
 
         // Get all the movies
-        List<Movie> movies = new ArrayList<>(Movie.getAllMovies());
+        List<Movie> moviesSortedByYear = new ArrayList<>(Movie.getAllMovies());
 
         // Sort them by year with the byYear Comparator
-        movies.sort(Movie.byYear);
-        System.out.println("Movies sorted by year: " + movies);
+        moviesSortedByYear.sort(Movie.byYear);
+        System.out.printf("%-" + padding + "s | %s%n%n",
+                "Movies sorted by year", moviesSortedByYear);
 
         // NEW FUNCTIONS
 
@@ -147,15 +161,24 @@ public class Main {
         DataLoader.loadReviewsFromCSV("reviews.csv", ",");
 
         // Print movies by genre
+        System.out.println("--- Print movies by genre example ---");
         Movie.printMoviesByGenre();
+        System.out.println();
 
         // Get a user to demonstrate the Recommender class
         User john = User.getSpecificUser("john_d");
-        john.printDetails();
 
         // Get a movie to demonstrate the genreWeightCalculation
+        System.out.println("--- Genre weight demonstration ---");
         Movie pulp = Movie.getSpecificMovie("Pulp Fiction");
-        System.out.println(Recommender.getAverageGenreWeightByUser(pulp, john));
+        System.out.printf("%s: %.1f%n", "Average genre weight for pulp fiction based on reviews by john: ",
+                Recommender.getAverageGenreWeightByUser(pulp, john)); /*
+                                                                       * It's 0.5 because that's the default value when
+                                                                       * a person hasn't reviewed any movies in the
+                                                                       * genres of the given movie
+                                                                       */
+        System.out.printf("%s: %.1f%n%n", "Average genre weight for pulp fiction based on reviews by maria: ",
+                Recommender.getAverageGenreWeightByUser(pulp, User.getSpecificUser("maria89")));
 
         // Get a list of movies recommended by the content a specific user watches
         System.out.println("--- Movies recommended by content for john ---");
@@ -181,7 +204,10 @@ public class Main {
         // rating of >= 7 to be considered highly rated)
         System.out.println("--- Highest rated movies ---");
         List<Movie> highestRatedMovies = Movie.getHighRatedMovies();
-        System.out.println(highestRatedMovies);
+        highestRatedMovies.sort(Movie.byAverageRating.reversed());
+        for (Movie m : highestRatedMovies) {
+            System.out.printf("%s: %.2f%n", m, m.getAverageRating());
+        }
 
     }
 }
